@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:my_time/services/weather.dart';
 import 'package:my_time/widgets/today_weather.dart';
 
 class WeatherList extends StatefulWidget {
@@ -7,6 +8,10 @@ class WeatherList extends StatefulWidget {
 }
 
 class _WeatherListState extends State<WeatherList> {
+  void getLocationData() async {
+    var weatherData = await WeatherService().getLocationWeather();
+  }
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -22,5 +27,12 @@ class _WeatherListState extends State<WeatherList> {
         ),
       ),
     );
+  }
+
+  @override
+  void initState() {
+    super.initState();
+
+    getLocationData();
   }
 }
